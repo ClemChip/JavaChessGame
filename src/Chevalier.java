@@ -5,15 +5,28 @@ public class Chevalier extends Piece{
 
     @Override
     public boolean peutBouger(Position newPosition, Piece[][] board) {
-        if (newPosition.getLigne() == position.getLigne() && newPosition.getColonne() == position.getColonne()) {
-            return false;
-        }
-
         //////////////////
         //// MVT EN L ////
         /// //////////////
+        int ligneDiff = Math.abs(position.getLigne() - newPosition.getLigne());
+        int colDiff = Math.abs(position.getColonne()- newPosition.getColonne());
 
+        boolean peutBouger = (ligneDiff == 2 && colDiff == 1) || (ligneDiff == 1 && colDiff == 2);
+        if (!peutBouger) {
+            return false;
+        }
 
-        return false;
+        //////////////////////////////
+        //// PIECE SUR LE PASSAGE ////
+        //////////////////////////////
+        Piece destinationPiece = board[newPosition.getLigne()][newPosition.getColonne()];
+        // S'il n'y a personne
+        if (destinationPiece == null) {
+            return true;
+        }
+        // Capture la piece
+        else {
+            return destinationPiece.getCouleur() != this.getCouleur();
+        }
     }
 }

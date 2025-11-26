@@ -56,11 +56,8 @@ public class Tour extends Piece{
             return true;
         }
         // Capture la piece
-        else if (destinationPiece.getCouleur() != this.getCouleur()) {
-            return true;
+        else {
+            return destinationPiece.getCouleur() != this.getCouleur();
         }
-
-        return false; // Piece de son équipe
-
     }
 }
