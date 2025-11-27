@@ -30,14 +30,9 @@ public class Fou extends Piece {
         //// PIECE SUR LE PASSAGE ////
         //////////////////////////////
         Piece destinationPiece = board[newPosition.getLigne()][newPosition.getColonne()];
-        // S'il n'y a personne
-        if (destinationPiece == null) {
-            return true;
-        }
-        // Capture la piece
-        else {
-            return destinationPiece.getCouleur() != this.getCouleur();
-        }
+
+        return destinationPiece == null || destinationPiece.getCouleur() != this.getCouleur();
+
     }
 
 }
