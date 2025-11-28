@@ -7,6 +7,21 @@ public class ChessBoard {
         setupPieces(); // mettre en place les pièces dans leur premiere position
     }
 
+    public Piece [][] getBoard(){
+        return board;
+    }
+
+    public Piece getPiece(int ligne, int colonne) {
+        return board[ligne][colonne];
+    }
+
+    public void setPiece(int ligne, int colonne, Piece piece) {
+        board[ligne][colonne] = piece;
+        if (piece != null) {
+            piece.setPosition(new Position(ligne, colonne));
+        }
+    }
+
     private void setupPieces() {
         // Place Tours
         board[0][0] = new Tour(PieceCouleur.BLACK, new Position(0, 0));
@@ -36,18 +51,18 @@ public class ChessBoard {
         }
     }
 
-    public void movePiece(Position start, Position end) {
+    public void bougerPiece(Position debut, Position fin) {
         // Vérifie s'il y a une pièce en position de départ et si la piece peut bouger
-        if (board[start.getLigne()][start.getColonne()] != null && board[start.getLigne()][start.getColonne()].peutBouger(end, board)) {
+        if (board[debut.getLigne()][debut.getColonne()] != null && board[debut.getLigne()][debut.getColonne()].peutBouger(fin, board)) {
 
             // Effectue le mouvement : place la pièce en position finale
-            board[end.getLigne()][end.getColonne()] = board[start.getLigne()][start.getColonne()];
+            board[fin.getLigne()][fin.getColonne()] = board[debut.getLigne()][debut.getColonne()];
 
             // Met à jour la position
-            board[end.getLigne()][end.getColonne()].setPosition(end);
+            board[fin.getLigne()][fin.getColonne()].setPosition(fin);
 
             // Efface la position de départ
-            board[start.getLigne()][start.getColonne()] = null;
+            board[debut.getLigne()][debut.getColonne()] = null;
         }
     }
 }
